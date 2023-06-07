@@ -1,0 +1,42 @@
+# Server
+server:
+  port: 18080
+  servelt:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+# DB - Master
+spring:
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/dev?useUnicode=true&autoReconnect=true&useSSL=false&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=Asia/Seoul
+      username: user
+      password: 1234
+      connection-init-sql: SELECT 1
+    tomcat:
+      max-wait: 10
+      max-active: 2
+      test-on-borrow: true
+
+# DB - Slave
+readonly:
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/dev?useUnicode=true&autoReconnect=true&useSSL=false&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=Asia/Seoul
+      username: user
+      password: 1234
+
+# MyBatis
+mybatis:
+  mapper-locations: classpath*:sql/*_SQL.xml
+  config-location: classpath*:config/mybatis-config.xml
+
+# Redis
+redis:
+  ip: 127.0.0.1
+  port: 6379
